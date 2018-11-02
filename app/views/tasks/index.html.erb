@@ -5,9 +5,17 @@
 <ul>
   <% @tasks.each do |task| %>
   <li>
-    <p> <%= task.name %></p>
-    <p><%= task.details %></p>
+    <% if task.completed? %>
+    <h2> <input type="checkbox" checked> <%= link_to task.name, task_path(task) %></h2>
+    <p><%= link_to 'Edit task', edit_path(task) %></p>
+    <% else %>
+    <h2> <input type="checkbox"> <%= link_to task.name, task_path(task) %></h2>
+      <p><%= link_to 'Edit task', edit_path(task) %></p>
+    <% end %>
+       <p><%= link_to 'Delete task', delete_path(task), method: :delete %></p>
   </li>
   <% end %>
 </ul>
+
+<p> <%= link_to 'Add a new task', tasks_new_path %> </p>
 
